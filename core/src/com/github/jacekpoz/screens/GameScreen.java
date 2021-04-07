@@ -5,9 +5,11 @@ import com.badlogic.gdx.Screen;
 import com.github.jacekpoz.PopeClickerGame;
 import com.github.jacekpoz.Score;
 
-public class GameScreen implements Screen {
-    final PopeClickerGame game;
+import static com.github.jacekpoz.GlobalVars.POPE;
 
+public class GameScreen implements Screen {
+
+    final PopeClickerGame game;
 
     public GameScreen(final PopeClickerGame popeClickerGame) {
         game = popeClickerGame;
@@ -18,12 +20,12 @@ public class GameScreen implements Screen {
         game.batch.begin();
 
         if (Gdx.input.justTouched()) {
-            if (game.pope.isTouched()) {
+            if (POPE.isTouched()) {
                 Score.addScore();
             }
         }
 
-        game.pope.drawPope(game.batch);
+        POPE.drawPope(game.batch);
 
         game.batch.end();
     }
@@ -45,7 +47,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        game.pope.dispose();
+        POPE.dispose();
     }
 
 }

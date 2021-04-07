@@ -3,20 +3,20 @@ package com.github.jacekpoz.pope;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Disposable;
+import com.github.jacekpoz.shop.skins.PopeSkin;
 
-import static com.github.jacekpoz.GlobalVars.*;
+import static com.github.jacekpoz.GlobalVars.POPE_GIF;
+import static com.github.jacekpoz.GlobalVars.TEXTURES_LOCATION;
 
 public class Pope implements Disposable {
 
     private static final int POPE_GIF_COLS = 7;
 
-    private Texture popeTexture;
-    private Sprite popeSprite;
+    private PopeSkin skin = PopeSkin.DEFAULT_POPE;
     private Rectangle hitBox;
     private Animation<TextureRegion> popeGif;
     private Texture popeGifImage;
@@ -24,16 +24,11 @@ public class Pope implements Disposable {
     private float gifTime = 0f;
 
     public Pope() {
-        popeTexture = new Texture(TEXTURES_LOCATION + POPE_IMAGE);
-        popeSprite = new Sprite(popeTexture);
-        popeSprite.setSize(300, 300);
-        popeSprite.setPosition(Gdx.graphics.getWidth() / 2 - popeSprite.getWidth() / 2,
-                Gdx.graphics.getHeight() / 2 - popeSprite.getHeight() / 2);
         popeGifImage = new Texture(Gdx.files.internal(TEXTURES_LOCATION + POPE_GIF));
 
-        hitBox = new Rectangle(popeSprite.getX(), popeSprite.getY(),
-                popeSprite.getWidth() * popeSprite.getScaleX(),
-                popeSprite.getHeight() * popeSprite.getScaleY());
+        hitBox = new Rectangle(skin.getSprite().getX(), skin.getSprite().getY(),
+                skin.getSprite().getWidth() * skin.getSprite().getScaleX(),
+                skin.getSprite().getHeight() * skin.getSprite().getScaleY());
 
         TextureRegion[][] temp = TextureRegion.split(popeGifImage,
                 popeGifImage.getWidth() / POPE_GIF_COLS,
@@ -54,7 +49,7 @@ public class Pope implements Disposable {
             TextureRegion frame = popeGif.getKeyFrame(gifTime, true);
             batch.draw(frame, hitBox.x, hitBox.y, hitBox.width, hitBox.height);
         } else {
-            popeSprite.draw(batch);
+            skin.getSprite().draw(batch);
         }
     }
 
@@ -62,20 +57,11 @@ public class Pope implements Disposable {
         isGif = !isGif;
     }
 
-    public Sprite getPopeSprite() {
-        return popeSprite;
-    }
-
-    public Animation<TextureRegion> getPopeGif() {
-        return popeGif;
-    }
-
-    public Rectangle getHitBox() {
-        return hitBox;
+    public void setSkin(PopeSkin s) {
+        skin = s;
     }
 
     public void dispose() {
-        popeTexture.dispose();
         popeGifImage.dispose();
     }
 }

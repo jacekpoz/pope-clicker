@@ -7,10 +7,6 @@ public class TimeUpgrade extends Upgrade {
         super(fileName, upgradeName, initialPrice, upgradeScore, x, y);
     }
 
-    public TimeUpgrade() {
-        super();
-    }
-
     @Override
     public void buy() {
         amount++;

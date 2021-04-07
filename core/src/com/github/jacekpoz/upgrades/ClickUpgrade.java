@@ -7,10 +7,6 @@ public class ClickUpgrade extends Upgrade {
         super(fileName, upgradeName, initialPrice, upgradeScore, x, y);
     }
 
-    public ClickUpgrade() {
-        super();
-    }
-
     @Override
     public void buy() {
         amount++;

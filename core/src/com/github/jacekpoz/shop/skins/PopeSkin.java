@@ -1,8 +1,11 @@
 package com.github.jacekpoz.shop.skins;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Disposable;
 
-import java.util.Random;
+import static com.github.jacekpoz.GlobalVars.*;
 
 public enum PopeSkin implements Skin, Disposable {
 
@@ -27,30 +30,43 @@ public enum PopeSkin implements Skin, Disposable {
     private final String name;
     private final String skinLocation;
     private boolean isUnlocked;
+    private Texture popeTexture;
+    private Sprite popeSprite;
 
-    PopeSkin(String name, String image, boolean isUnlocked) {
-        this.name = name;
-        this.skinLocation = image;
-        this.isUnlocked = isUnlocked;
+    PopeSkin(String skinName, String image, boolean unlocked) {
+        name = skinName;
+        skinLocation = image;
+        isUnlocked = unlocked;
+        popeTexture = new Texture(Gdx.files.internal(TEXTURES_LOCATION + SKINS_LOCATION + image));
+        popeSprite = new Sprite(popeTexture);
+        popeSprite.setBounds(Gdx.graphics.getWidth() / 2 - popeSprite.getWidth() / 2,
+                Gdx.graphics.getHeight() / 2 - popeSprite.getHeight() / 2,
+                POPE_SIZE, POPE_SIZE);
     }
 
     @Override
     public boolean isUnlocked() {
-        return false;
+        return isUnlocked;
     }
 
     @Override
     public void unlock() {
-
+        isUnlocked = true;
     }
 
     @Override
-    public Skin getRandomSkin() {
-        return values()[new Random().nextInt(values().length)];
+    public void setSkin(Skin s) {
+        if (s instanceof PopeSkin) {
+            POPE.setSkin((PopeSkin) s);
+        }
+    }
+
+    public Sprite getSprite() {
+        return popeSprite;
     }
 
     @Override
     public void dispose() {
-
+        popeTexture.dispose();
     }
 }

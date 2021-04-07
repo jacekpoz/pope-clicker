@@ -6,11 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.github.jacekpoz.pope.Pope;
-import com.github.jacekpoz.screens.GameScreen;
-import com.github.jacekpoz.screens.MainMenuScreen;
-import com.github.jacekpoz.screens.StatisticsScreen;
-import com.github.jacekpoz.screens.UpgradesScreen;
+import com.github.jacekpoz.screens.*;
 import com.github.jacekpoz.shop.skins.Background;
 import com.github.jacekpoz.shop.skins.Soundtrack;
 import com.github.jacekpoz.upgrades.ClickUpgrade;
@@ -18,7 +14,9 @@ import com.github.jacekpoz.upgrades.TimeUpgrade;
 import com.github.jacekpoz.upgrades.Upgrade;
 import com.github.jacekpoz.util.FontUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class PopeClickerGame extends Game {
 
@@ -32,8 +30,6 @@ public class PopeClickerGame extends Game {
     public List<Upgrade> upgrades;
 
     public SaveAndLoadHandler handler;
-
-    public Pope pope;
 
     public Soundtrack soundtrack;
     public Background background;
@@ -87,10 +83,8 @@ public class PopeClickerGame extends Game {
 
         handler = new SaveAndLoadHandler(this);
 
-        pope = new Pope();
-
         soundtrack = Soundtrack.ZAWADIAKA;
-        soundtrack.play();
+//        soundtrack.play();
         background = Background.DEFAULT_BACKGROUND;
     }
 
@@ -111,6 +105,7 @@ public class PopeClickerGame extends Game {
         if (Gdx.input.isKeyJustPressed(Input.Keys.H)) {
             handler.loadUpgrades();
             handler.loadScores();
+            Score.incrementScore();
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.U)) {
@@ -123,9 +118,14 @@ public class PopeClickerGame extends Game {
             else setScreen(new StatisticsScreen(this));
         }
 
+        if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
+            if (screen instanceof ShopScreen) setScreen(new GameScreen(this));
+            else setScreen(new ShopScreen(this));
+        }
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)) setScreen(new GameScreen(this));
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.Y)) SpecialMode.specialMode(pope);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.Y)) SpecialMode.specialMode();
 
     }
 

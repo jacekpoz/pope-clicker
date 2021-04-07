@@ -5,8 +5,6 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter;
 import com.github.jacekpoz.upgrades.Upgrade;
 
-import java.util.regex.Pattern;
-
 import static com.github.jacekpoz.GlobalVars.*;
 
 public class SaveAndLoadHandler {

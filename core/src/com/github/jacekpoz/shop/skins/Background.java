@@ -5,8 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Disposable;
 
-import java.util.Random;
-
 import static com.github.jacekpoz.GlobalVars.*;
 
 public enum Background implements Skin, Disposable {
@@ -31,10 +29,13 @@ public enum Background implements Skin, Disposable {
         backgroundSprite.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
     }
 
-    public void setBackground(Background b) {
-        backgroundTexture = new Texture(Gdx.files.internal(TEXTURES_LOCATION + BACKGROUNDS_LOCATION + b.backgroundLocation));
-        backgroundSprite = new Sprite(backgroundTexture);
-        backgroundSprite.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
+    @Override
+    public void setSkin(Skin s) {
+        if (s instanceof Background) {
+            backgroundTexture = new Texture(Gdx.files.internal(TEXTURES_LOCATION + BACKGROUNDS_LOCATION + ((Background) s).backgroundLocation));
+            backgroundSprite = new Sprite(backgroundTexture);
+            backgroundSprite.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
+        }
     }
 
     @Override
@@ -50,11 +51,6 @@ public enum Background implements Skin, Disposable {
     @Override
     public void unlock() {
         this.isUnlocked = true;
-    }
-
-    @Override
-    public Skin getRandomSkin() {
-        return values()[new Random().nextInt(values().length)];
     }
 
     public Sprite getSprite() {

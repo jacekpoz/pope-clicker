@@ -6,5 +6,6 @@ public interface Skin {
 
     void unlock();
 
-    Skin getRandomSkin();
+    void setSkin(Skin s);
+
 }

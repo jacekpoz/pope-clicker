@@ -1,6 +1,6 @@
 package com.github.jacekpoz;
 
-import com.github.jacekpoz.pope.Pope;
+import static com.github.jacekpoz.GlobalVars.*;
 
 public class SpecialMode {
 
@@ -8,9 +8,9 @@ public class SpecialMode {
 
     private static boolean isOn = false;
 
-    public static void specialMode(Pope pope) {
+    public static void specialMode() {
         isOn = !isOn;
-        pope.changePope();
+        POPE.changePope();
     }
 
     public static boolean isOn() {

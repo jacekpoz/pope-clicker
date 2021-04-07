@@ -3,9 +3,6 @@ package com.github.jacekpoz.shop.skins;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.utils.Disposable;
-import com.github.jacekpoz.upgrades.Buyable;
-
-import java.util.Random;
 
 import static com.github.jacekpoz.GlobalVars.MUSIC_LOCATION;
 
@@ -40,9 +37,12 @@ public enum Soundtrack implements Disposable, Skin {
         music.play();
     }
 
-    public void setMusic(Soundtrack s) {
-        music = Gdx.audio.newMusic(Gdx.files.internal(MUSIC_LOCATION + s.songLocation));
-        play();
+    @Override
+    public void setSkin(Skin s) {
+        if (s instanceof Soundtrack) {
+            music = Gdx.audio.newMusic(Gdx.files.internal(MUSIC_LOCATION + ((Soundtrack) s).songLocation));
+            play();
+        }
     }
 
     @Override
@@ -53,11 +53,6 @@ public enum Soundtrack implements Disposable, Skin {
     @Override
     public void unlock() {
         isUnlocked = true;
-    }
-
-    @Override
-    public Skin getRandomSkin() {
-        return values()[new Random().nextInt(values().length)];
     }
 
     @Override

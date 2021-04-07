@@ -3,17 +3,24 @@ package com.github.jacekpoz.shop.crates;
 import com.github.jacekpoz.shop.skins.Skin;
 import com.github.jacekpoz.upgrades.Buyable;
 
-public abstract class Crate<T extends Skin> implements Buyable {
+public class Crate<S extends Skin> implements Buyable {
 
-    private T drop;
     private int price;
 
-    public Crate() {
+    public Crate(int p) {
+
+        price = p;
+    }
+
+    @Override
+    public void buy() {
 
     }
 
     @Override
-    public abstract void buy();
+    public long getPrice() {
+        return price;
+    }
 
 }
 
