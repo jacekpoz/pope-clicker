@@ -1,4 +1,4 @@
-# pope-clicker-fxgl
+# pope-clicker
 
 Authors: me (coding), splavsky (graphics), JustRafau (graphics), Gimper Murzyn#0150 (ideas and graphics), krizej (graphics)
 
