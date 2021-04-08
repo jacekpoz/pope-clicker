@@ -12,7 +12,7 @@ import static com.github.jacekpoz.GlobalVars.UPGRADES_LOCATION;
 
 public abstract class Upgrade implements Disposable, Buyable, Json.Serializable {
 
-    private static final float IMAGE_SIZE = 100;
+    protected static final float IMAGE_SIZE = 100;
 
     private Texture image;
     private Sprite sprite;
@@ -31,6 +31,7 @@ public abstract class Upgrade implements Disposable, Buyable, Json.Serializable 
     public Upgrade(String fileName, String upgradeName, long initialPrice, int upgradeScore, int x, int y) {
         imageName = fileName;
         image = new Texture(Gdx.files.internal(TEXTURES_LOCATION + UPGRADES_LOCATION + fileName));
+
 
         sprite = new Sprite(image);
 
@@ -100,6 +101,7 @@ public abstract class Upgrade implements Disposable, Buyable, Json.Serializable 
         imageX = jsonData.get("x").asFloat();
         imageY = jsonData.get("y").asFloat();
         sprite.setPosition(imageX, imageY);
+        sprite.setSize(IMAGE_SIZE, IMAGE_SIZE);
         textX = imageX + IMAGE_SIZE / 8;
         textY = imageY - 10;
     }

@@ -1,4 +1,4 @@
-package com.github.jacekpoz;
+package com.github.jacekpoz.util;
 
 import java.math.BigInteger;
 
@@ -6,9 +6,9 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import com.github.jacekpoz.upgrades.Buyable;
 
-public class Score {
+public class Scores {
 
-    private Score() {/*nope*/}
+    private Scores() {/*nope*/}
 
     private static BigInteger actualScore = BigInteger.ZERO;
 

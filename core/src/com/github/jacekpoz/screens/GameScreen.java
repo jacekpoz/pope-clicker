@@ -3,7 +3,7 @@ package com.github.jacekpoz.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.github.jacekpoz.PopeClickerGame;
-import com.github.jacekpoz.Score;
+import com.github.jacekpoz.util.Scores;
 
 import static com.github.jacekpoz.GlobalVars.POPE;
 
@@ -21,7 +21,7 @@ public class GameScreen implements Screen {
 
         if (Gdx.input.justTouched()) {
             if (POPE.isTouched()) {
-                Score.addScore();
+                Scores.addScore();
             }
         }
 

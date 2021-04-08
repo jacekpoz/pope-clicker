@@ -2,7 +2,7 @@ package com.github.jacekpoz.screens;
 
 import com.badlogic.gdx.Screen;
 import com.github.jacekpoz.PopeClickerGame;
-import com.github.jacekpoz.Score;
+import com.github.jacekpoz.util.Scores;
 
 //TODO add more statistics in here
 
@@ -17,7 +17,7 @@ public class StatisticsScreen implements Screen {
     @Override
     public void render(float delta) {
         game.batch.begin();
-        game.font.draw(game.batch, "Punkty: " + Score.getTotalScore(), 250, 400);
+        game.font.draw(game.batch, "Punkty: " + Scores.getTotalScore(), 250, 400);
         game.batch.end();
     }
 

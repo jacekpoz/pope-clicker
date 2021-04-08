@@ -31,6 +31,7 @@ public class GlobalVars {
     public static final String MUSIC_LOCATION = "music\\";
 
     public static final String SCORES_FILE = "scores.json";
+    public static final String UPGRADES_FILE = "upgrades.json";
 
     public static final String POPE_GIF = "popegif.png";
 

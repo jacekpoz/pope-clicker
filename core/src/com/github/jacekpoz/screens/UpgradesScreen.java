@@ -5,7 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.github.jacekpoz.PopeClickerGame;
-import com.github.jacekpoz.Score;
+import com.github.jacekpoz.util.Scores;
 import com.github.jacekpoz.upgrades.Upgrade;
 
 // I guess this is fine but could use a bit more work like scrolling when there's more upgrades or shit idk
@@ -41,7 +41,7 @@ public class UpgradesScreen implements Screen {
             for (Upgrade u : game.upgrades) {
                 input = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
                 if (u.getSprite().getBoundingRectangle().contains(input.x, input.y)
-                        && Score.canBuyBuyable(u)) {
+                        && Scores.canBuyBuyable(u)) {
                     u.buy();
                 }
             }
