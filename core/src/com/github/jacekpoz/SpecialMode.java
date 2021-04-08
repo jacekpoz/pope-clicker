@@ -2,6 +2,8 @@ package com.github.jacekpoz;
 
 import static com.github.jacekpoz.GlobalVars.*;
 
+//TODO actually make this work, right now this is only for debugging the gif
+
 public class SpecialMode {
 
     private SpecialMode() {/*nope*/}

@@ -11,12 +11,12 @@ public class FontUtils {
 
     private FontUtils() {/*nope*/}
 
-    public static BitmapFont generateFontFromFile(String fileName, int fontSize) {
+    public static BitmapFont generateFontFromFile(String fileName, int fontSize, Color color) {
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal(FONTS_LOCATION + fileName));
         FreeTypeFontGenerator.FreeTypeFontParameter param = new FreeTypeFontGenerator.FreeTypeFontParameter();
         param.size = fontSize;
         param.characters = ALL_CHARS;
-        param.color = Color.BLACK;
+        param.color = color;
         BitmapFont font = gen.generateFont(param);
         gen.dispose();
         return font;

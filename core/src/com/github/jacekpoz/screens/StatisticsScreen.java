@@ -4,6 +4,8 @@ import com.badlogic.gdx.Screen;
 import com.github.jacekpoz.PopeClickerGame;
 import com.github.jacekpoz.Score;
 
+//TODO add more statistics in here
+
 public class StatisticsScreen implements Screen {
 
     final PopeClickerGame game;

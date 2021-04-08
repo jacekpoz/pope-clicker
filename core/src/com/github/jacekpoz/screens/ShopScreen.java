@@ -3,6 +3,7 @@ package com.github.jacekpoz.screens;
 import com.badlogic.gdx.Screen;
 import com.github.jacekpoz.PopeClickerGame;
 
+//TODO actually make this
 
 public class ShopScreen implements Screen {
 

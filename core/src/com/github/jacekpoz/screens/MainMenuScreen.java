@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.github.jacekpoz.PopeClickerGame;
 
+//TODO make this better
+
 public class MainMenuScreen implements Screen {
 
     final PopeClickerGame game;

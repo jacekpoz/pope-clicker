@@ -30,6 +30,8 @@ public class Pope implements Disposable {
                 skin.getSprite().getWidth() * skin.getSprite().getScaleX(),
                 skin.getSprite().getHeight() * skin.getSprite().getScaleY());
 
+        // ok the gif implementation isn't that great but at least it worked the first time I tried
+        // and I based it off of what the wiki said so I guess it's fine?
         TextureRegion[][] temp = TextureRegion.split(popeGifImage,
                 popeGifImage.getWidth() / POPE_GIF_COLS,
                 popeGifImage.getHeight());

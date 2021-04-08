@@ -3,6 +3,7 @@ package com.github.jacekpoz;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -20,6 +21,7 @@ import java.util.List;
 
 public class PopeClickerGame extends Game {
 
+    // used for positioning the upgrades on the screen
     private static final int UPGRADE_Y = 500;
     private static final int UPGRADE_X_OFFSET = 125;
     private static final int UPGRADE_Y_OFFSET = 150;
@@ -36,8 +38,10 @@ public class PopeClickerGame extends Game {
 
     public void create() {
         batch = new SpriteBatch();
-        font = FontUtils.generateFontFromFile("Rubik-Medium.ttf", 16);
+        font = FontUtils.generateFontFromFile("Rubik-Medium.ttf", 16, Color.BLACK);
         setScreen(new MainMenuScreen(this));
+        //TODO probably should move all of this over to json files and then load the upgrades depending on the files'
+        // contents, but first I gotta figure out how json works
         upgrades = new ArrayList<>();
         Upgrade kremowka = new TimeUpgrade("kremowka.png",
                 "Kremówka", 5, 1,
@@ -123,8 +127,9 @@ public class PopeClickerGame extends Game {
             else setScreen(new ShopScreen(this));
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) setScreen(new GameScreen(this));
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P) && !(screen instanceof GameScreen)) setScreen(new GameScreen(this));
 
+        // debugging, remove for release
         if (Gdx.input.isKeyJustPressed(Input.Keys.Y)) SpecialMode.specialMode();
 
     }
@@ -136,7 +141,8 @@ public class PopeClickerGame extends Game {
         for (Upgrade u : upgrades) {
             u.dispose();
         }
-
+        background.dispose();
+        soundtrack.dispose();
     }
 
 }

@@ -8,12 +8,17 @@ import com.github.jacekpoz.PopeClickerGame;
 import com.github.jacekpoz.Score;
 import com.github.jacekpoz.upgrades.Upgrade;
 
+// I guess this is fine but could use a bit more work like scrolling when there's more upgrades or shit idk
+
 public class UpgradesScreen implements Screen {
 
     final PopeClickerGame game;
 
+    //TODO ok so I added the camera in here after it didn't work without it and smarter people told me to do so
+    // I gotta learn about the cameras in here and then implement it in a way which doesn't hurt anybody's eyes
+
     OrthographicCamera camera;
-    Vector3 unprojected;
+    Vector3 input;
 
     public UpgradesScreen(final PopeClickerGame popeClickerGame) {
         game = popeClickerGame;
@@ -34,8 +39,8 @@ public class UpgradesScreen implements Screen {
 
         if (Gdx.input.justTouched()) {
             for (Upgrade u : game.upgrades) {
-                unprojected = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-                if (u.getSprite().getBoundingRectangle().contains(unprojected.x, unprojected.y)
+                input = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+                if (u.getSprite().getBoundingRectangle().contains(input.x, input.y)
                         && Score.canBuyBuyable(u)) {
                     u.buy();
                 }

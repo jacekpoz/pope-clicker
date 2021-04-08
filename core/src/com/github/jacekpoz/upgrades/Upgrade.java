@@ -72,6 +72,9 @@ public abstract class Upgrade implements Disposable, Buyable, Json.Serializable 
 
     public abstract void buy();
 
+    //TODO ok I know that this is really wonky and should be changed but this is what I managed to make by myself
+    // I really need to fix this
+
     @Override
     public void write(Json json) {
         json.writeValue("texture", imageName);
