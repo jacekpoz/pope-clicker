@@ -17,7 +17,7 @@ public class StatisticsScreen implements Screen {
     @Override
     public void render(float delta) {
         game.batch.begin();
-        game.font.draw(game.batch, "Punkty: " + Scores.getTotalScore(), 250, 400);
+//        game.font.draw(game.batch, "Punkty: " + Scores.getTotalScore(), 250, 400);
         game.batch.end();
     }
 

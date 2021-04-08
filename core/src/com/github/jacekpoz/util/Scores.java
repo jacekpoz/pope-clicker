@@ -1,89 +1,40 @@
 package com.github.jacekpoz.util;
 
-import java.math.BigInteger;
-
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import com.github.jacekpoz.upgrades.Buyable;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Scores {
 
     private Scores() {/*nope*/}
 
-    private static BigInteger actualScore = BigInteger.ZERO;
+    public static Score score = new Score("score");
 
-    private static BigInteger totalScore = BigInteger.ZERO;
+    public static Score totalScore = new Score("totalScore");
 
-    private static BigInteger actualScorePerSecond = BigInteger.ZERO;
+    public static Score scorePerSecond = new Score("scorePerSecond");
 
-    private static BigInteger actualScorePerClick = BigInteger.ONE;
+    public static Score scorePerClick = new Score("scorePerClick", 1);
+
+    public static List<Score> scores = new ArrayList<>();
+
+    static {
+        scores.addAll(Arrays.asList(score, totalScore, scorePerSecond, scorePerClick));
+    }
 
     private static Task task = new Task() {
         @Override
         public void run() {
-            addScore(getScorePerSecond());
+            score.add(scorePerSecond.get());
         }
     };
 
-    public static void addScore(long amount) {
-        actualScore = actualScore.add(BigInteger.valueOf(amount));
-        totalScore = totalScore.add(BigInteger.valueOf(amount));
-    }
-
-    public static void subtractScore(long amount) {
-        actualScore = actualScore.subtract(BigInteger.valueOf(amount));
-    }
-
-    public static long getScore() {
-        return actualScore.longValue();
-    }
-
-    public static void setScore(long amount) {
-        actualScore = BigInteger.valueOf(amount);
-    }
-
-    public static long getTotalScore() {
-        return totalScore.longValue();
-    }
-
-    public static void setTotalScore(long amount) {
-        totalScore = BigInteger.valueOf(amount);
-    }
-
-    public static void addScorePerSecond(long amount) {
-        actualScorePerSecond = actualScorePerSecond.add(BigInteger.valueOf(amount));
-    }
-
-    public static void subtractScorePerSecond(long amount) {
-        addScorePerSecond(-amount);
-    }
-
-    public static long getScorePerSecond() {
-        return actualScorePerSecond.longValue();
-    }
-
-    public static void setScorePerSecond(long amount) {
-        actualScorePerSecond = BigInteger.valueOf(amount);
-    }
-
-    public static void addScorePerClick(long amount) {
-        actualScorePerClick = actualScorePerClick.add(BigInteger.valueOf(amount));
-    }
-
-    public static void subtractScorePerClick(long amount) {
-        addScorePerClick(-amount);
-    }
-
-    public static long getScorePerClick() {
-        return actualScorePerClick.longValue();
-    }
-
-    public static void setScorePerClick(long amount) {
-        actualScorePerClick = BigInteger.valueOf(amount);
-    }
-
     public static boolean canBuyBuyable(Buyable b) {
-        return getScore() >= b.getPrice();
+        return score.get() >= b.getPrice();
     }
 
     public static void incrementScore() {
@@ -91,14 +42,11 @@ public class Scores {
         task = new Task() {
             @Override
             public void run() {
-                addScore(getScorePerSecond());
+                score.add(scorePerSecond.get());
             }
         };
 
         Timer.schedule(task, 0.5f, 1);
     }
 
-    public static void addScore() {
-        addScore(getScorePerClick());
-    }
 }

@@ -8,4 +8,8 @@ public interface Skin {
 
     void setSkin(Skin s);
 
+    String getName();
+
+    String getLocation();
+
 }

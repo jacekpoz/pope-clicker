@@ -53,6 +53,16 @@ public enum Background implements Skin, Disposable {
         this.isUnlocked = true;
     }
 
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getLocation() {
+        return backgroundLocation;
+    }
+
     public Sprite getSprite() {
         return backgroundSprite;
     }

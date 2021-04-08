@@ -14,9 +14,9 @@ public class ClickUpgrade extends Upgrade {
     @Override
     public void buy() {
         amount++;
-        Scores.subtractScore(price);
+        Scores.score.subtract(price);
         price += (long) Math.log(price * 1.8);
-        Scores.addScorePerClick(score);
+        Scores.scorePerClick.add(score);
     }
 
 }

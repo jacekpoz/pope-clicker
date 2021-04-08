@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Disposable;
+import com.sun.org.apache.bcel.internal.generic.POP;
 
 import static com.github.jacekpoz.GlobalVars.*;
 
@@ -39,8 +40,8 @@ public enum PopeSkin implements Skin, Disposable {
         isUnlocked = unlocked;
         popeTexture = new Texture(Gdx.files.internal(TEXTURES_LOCATION + SKINS_LOCATION + image));
         popeSprite = new Sprite(popeTexture);
-        popeSprite.setBounds(Gdx.graphics.getWidth() / 2 - popeSprite.getWidth() / 2,
-                Gdx.graphics.getHeight() / 2 - popeSprite.getHeight() / 2,
+        popeSprite.setBounds(Gdx.graphics.getWidth() / 2f - POPE_SIZE / 2f,
+                Gdx.graphics.getHeight() / 2f - POPE_SIZE / 2f,
                 POPE_SIZE, POPE_SIZE);
     }
 
@@ -59,6 +60,16 @@ public enum PopeSkin implements Skin, Disposable {
         if (s instanceof PopeSkin) {
             POPE.setSkin((PopeSkin) s);
         }
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getLocation() {
+        return skinLocation;
     }
 
     public Sprite getSprite() {

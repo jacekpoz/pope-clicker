@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.github.jacekpoz.screens.*;
 import com.github.jacekpoz.shop.skins.Background;
+import com.github.jacekpoz.shop.skins.PopeSkin;
 import com.github.jacekpoz.shop.skins.Soundtrack;
 import com.github.jacekpoz.upgrades.Upgrade;
 import com.github.jacekpoz.util.FontUtils;
@@ -16,6 +17,9 @@ import com.github.jacekpoz.util.Scores;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import static com.github.jacekpoz.GlobalVars.POPE;
 
 public class PopeClickerGame extends Game {
 
@@ -38,52 +42,12 @@ public class PopeClickerGame extends Game {
         batch = new SpriteBatch();
         font = FontUtils.generateFontFromFile("Rubik-Medium.ttf", 16, Color.BLACK);
         setScreen(new MainMenuScreen(this));
-        //TODO probably should move all of this over to json files and then load the upgrades depending on the files'
-        // contents, but first I gotta figure out how json works
+
         upgrades = new ArrayList<>();
-//        Upgrade kremowka = new TimeUpgrade("kremowka.png",
-//                "Kremówka", 5, 1,
-//                10, UPGRADE_Y);
-//        Upgrade rzezba = new TimeUpgrade("rzezba.png",
-//                "Rzeźba", 8, 2,
-//                10 + UPGRADE_X_OFFSET, UPGRADE_Y);
-//        Upgrade marysia = new TimeUpgrade("mary.jpg",
-//                "Marysia", 11, 3,
-//                10 + UPGRADE_X_OFFSET * 2, UPGRADE_Y);
-//        Upgrade szpinak = new TimeUpgrade("spinach.png",
-//                "Szpinak", 14, 4,
-//                10 + UPGRADE_X_OFFSET * 3, UPGRADE_Y);
-//        Upgrade dziwisz = new TimeUpgrade("dziwisz.jpg",
-//                "Kard. Dziwisz", 17, 5,
-//                10 + UPGRADE_X_OFFSET * 4, UPGRADE_Y);
-//        Upgrade vatican = new TimeUpgrade("vatican.jpg",
-//                "Watykan", 20, 6,
-//                10 + UPGRADE_X_OFFSET * 5, UPGRADE_Y);
-//
-//        Upgrade pilka = new ClickUpgrade("football.png",
-//                "Piłka", 20, 1,
-//                10, UPGRADE_Y - UPGRADE_Y_OFFSET);
-//        Upgrade barka = new ClickUpgrade("barka.jpg",
-//                "Barka", 30, 2,
-//                10 + UPGRADE_X_OFFSET, UPGRADE_Y - UPGRADE_Y_OFFSET);
-//        Upgrade magik = new ClickUpgrade("magik.png",
-//                "Magik", 40, 3,
-//                10 + UPGRADE_X_OFFSET * 2, UPGRADE_Y - UPGRADE_Y_OFFSET);
-//        Upgrade jesus = new ClickUpgrade("jesus.png",
-//                "Jezus", 50, 4,
-//                10 + UPGRADE_X_OFFSET * 3, UPGRADE_Y - UPGRADE_Y_OFFSET);
-//        Upgrade dinosaur = new ClickUpgrade("dinosaur.png",
-//                "Dinozaur", 60, 5,
-//                10 + UPGRADE_X_OFFSET * 4, UPGRADE_Y - UPGRADE_Y_OFFSET);
-//        Upgrade papamobile = new ClickUpgrade("papamobile.jpg",
-//                "Papamobile", 70, 6,
-//                10 + UPGRADE_X_OFFSET * 5, UPGRADE_Y - UPGRADE_Y_OFFSET);
-//        upgrades.addAll(Arrays.asList(
-//                kremowka, rzezba, marysia, szpinak, dziwisz, vatican,
-//                pilka, barka, magik, jesus, dinosaur, papamobile
-//        ));
 
         handler = new SaveAndLoadHandler(this);
+
+        handler.loadAll();
 
         soundtrack = Soundtrack.ZAWADIAKA;
 //        soundtrack.play();
@@ -94,19 +58,17 @@ public class PopeClickerGame extends Game {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         background.getSprite().draw(batch);
-        font.draw(batch, "Punkty: " + Scores.getScore(), 10, 75);
-        font.draw(batch, "Punkty na sekundę: " + Scores.getScorePerSecond(), 10, 50);
-        font.draw(batch, "Punkty za kliknięcie: " + Scores.getScorePerClick(), 10, 25);
+        font.draw(batch, Scores.score.toString(), 10, 75);
+        font.draw(batch, Scores.scorePerSecond.toString(), 10, 50);
+        font.draw(batch, Scores.scorePerClick.toString(), 10, 25);
         batch.end();
         super.render();
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
-            handler.saveUpgrades();
-            handler.saveScores();
+            handler.saveAll();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.H)) {
-            handler.loadUpgrades();
-            handler.loadScores();
+            handler.loadAll();
             Scores.incrementScore();
         }
 
@@ -129,6 +91,7 @@ public class PopeClickerGame extends Game {
 
         // debugging, remove for release
         if (Gdx.input.isKeyJustPressed(Input.Keys.Y)) SpecialMode.specialMode();
+        if (Gdx.input.isKeyJustPressed(Input.Keys.I)) POPE.setSkin(PopeSkin.values()[new Random().nextInt(PopeSkin.values().length)]);
 
     }
 

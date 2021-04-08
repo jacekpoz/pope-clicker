@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter;
 import com.github.jacekpoz.upgrades.Upgrade;
+import com.github.jacekpoz.util.Score;
 import com.github.jacekpoz.util.Scores;
 
 import java.util.Arrays;
@@ -20,57 +21,44 @@ import static com.github.jacekpoz.GlobalVars.*;
 public class SaveAndLoadHandler {
 
     final PopeClickerGame game;
+    private Json json;
 
     public SaveAndLoadHandler(final PopeClickerGame popeClickerGame) {
         game = popeClickerGame;
+        json = new Json();
+    }
+
+    public void saveAll() {
+        saveUpgrades();
+        saveScores();
+    }
+
+    public void loadAll() {
+        loadUpgrades();
+        loadScores();
     }
 
     public void saveUpgrades() {
-        Json json = new Json();
-        json.setOutputType(JsonWriter.OutputType.json);
-
         Upgrade[] u = game.upgrades.toArray(new Upgrade[0]);
-        json.toJson(u, u.getClass(), Gdx.files.local(JSON_LOCATION + "upgrades.json"));
+        json.toJson(u, u.getClass(), Gdx.files.local(JSON_LOCATION + UPGRADES_FILE));
 
-//        for (Upgrade u : game.upgrades) {
-//            json.toJson(u, u.getClass(), Gdx.files.local(JSON_LOCATION + UPGRADES_LOCATION +
-//                    u.getName().toLowerCase() + ".json"));
-//        }
     }
 
     public void loadUpgrades() {
-        Json json = new Json();
-        json.setOutputType(JsonWriter.OutputType.json);
-
         game.upgrades.clear();
         game.upgrades.addAll(Arrays.asList(
-                json.fromJson(Upgrade[].class, Gdx.files.local(JSON_LOCATION + "upgrades.json"))));
+                json.fromJson(Upgrade[].class, Gdx.files.local(JSON_LOCATION + UPGRADES_FILE))));
 
-//        for (Upgrade u : game.upgrades) {
-//            u.set(json.fromJson(u.getClass(), Gdx.files.local(JSON_LOCATION + UPGRADES_LOCATION +
-//                    u.getName().toLowerCase() + ".json")));
-//        }
     }
 
     public void saveScores() {
-        Json json = new Json();
-        json.setOutputType(JsonWriter.OutputType.json);
-        long[] jsonValues = {
-                Scores.getScore(),
-                Scores.getTotalScore(),
-                Scores.getScorePerSecond(),
-                Scores.getScorePerClick()
-        };
-        json.toJson(jsonValues, long[].class, Gdx.files.local(JSON_LOCATION + SCORES_FILE));
+        Score[] s = Scores.scores.toArray(new Score[0]);
+        json.toJson(s, s.getClass(), Gdx.files.local(JSON_LOCATION + SCORES_FILE));
     }
 
     public void loadScores() {
-        Json json = new Json();
-        json.setOutputType(JsonWriter.OutputType.json);
-        long[] jsonValues = json.fromJson(long[].class, Gdx.files.local(JSON_LOCATION + SCORES_FILE));
-        Scores.setScore(jsonValues[0]);
-        Scores.setTotalScore(jsonValues[1]);
-        Scores.setScorePerSecond(jsonValues[2]);
-        Scores.setScorePerClick(jsonValues[3]);
+        Scores.scores.clear();
+        Scores.scores.addAll(Arrays.asList(
+                json.fromJson(Score[].class, Gdx.files.local(JSON_LOCATION + SCORES_FILE))));
     }
 }

@@ -51,6 +51,16 @@ public enum Soundtrack implements Disposable, Skin {
     }
 
     @Override
+    public String getName() {
+        return songName;
+    }
+
+    @Override
+    public String getLocation() {
+        return songLocation;
+    }
+
+    @Override
     public void unlock() {
         isUnlocked = true;
     }

@@ -14,9 +14,9 @@ public class TimeUpgrade extends Upgrade {
     @Override
     public void buy() {
         amount++;
-        Scores.subtractScore(price);
+        Scores.score.subtract(price);
         price += (long) Math.log(price * 1.5);
-        Scores.addScorePerSecond(score);
+        Scores.scorePerSecond.add(score);
         Scores.incrementScore();
     }
 
