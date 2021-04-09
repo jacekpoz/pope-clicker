@@ -2,12 +2,13 @@ package com.github.jacekpoz;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonWriter;
 import com.github.jacekpoz.upgrades.Upgrade;
 import com.github.jacekpoz.util.Score;
 import com.github.jacekpoz.util.Scores;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.github.jacekpoz.GlobalVars.*;
 
@@ -41,24 +42,21 @@ public class SaveAndLoadHandler {
     public void saveUpgrades() {
         Upgrade[] u = game.upgrades.toArray(new Upgrade[0]);
         json.toJson(u, u.getClass(), Gdx.files.local(JSON_LOCATION + UPGRADES_FILE));
-
     }
 
     public void loadUpgrades() {
         game.upgrades.clear();
         game.upgrades.addAll(Arrays.asList(
                 json.fromJson(Upgrade[].class, Gdx.files.local(JSON_LOCATION + UPGRADES_FILE))));
-
     }
 
     public void saveScores() {
-        Score[] s = Scores.scores.toArray(new Score[0]);
+        Map<String, Score> s = Scores.scores;
         json.toJson(s, s.getClass(), Gdx.files.local(JSON_LOCATION + SCORES_FILE));
     }
 
     public void loadScores() {
         Scores.scores.clear();
-        Scores.scores.addAll(Arrays.asList(
-                json.fromJson(Score[].class, Gdx.files.local(JSON_LOCATION + SCORES_FILE))));
+        Scores.scores.putAll(json.fromJson(HashMap.class, Gdx.files.local(JSON_LOCATION + SCORES_FILE)));
     }
 }

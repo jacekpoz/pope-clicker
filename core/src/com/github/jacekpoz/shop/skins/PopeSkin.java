@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Disposable;
-import com.sun.org.apache.bcel.internal.generic.POP;
 
 import static com.github.jacekpoz.GlobalVars.*;
 

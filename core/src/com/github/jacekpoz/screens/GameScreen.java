@@ -21,7 +21,7 @@ public class GameScreen implements Screen {
 
         if (Gdx.input.justTouched()) {
             if (POPE.isTouched()) {
-                Scores.score.add(Scores.scorePerClick.get());
+                Scores.click();
             }
         }
 

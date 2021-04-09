@@ -13,6 +13,7 @@ import com.github.jacekpoz.shop.skins.PopeSkin;
 import com.github.jacekpoz.shop.skins.Soundtrack;
 import com.github.jacekpoz.upgrades.Upgrade;
 import com.github.jacekpoz.util.FontUtils;
+import com.github.jacekpoz.util.Score;
 import com.github.jacekpoz.util.Scores;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Random;
 
 import static com.github.jacekpoz.GlobalVars.POPE;
+import static com.github.jacekpoz.GlobalVars.SCORE_OFFSET;
 
 public class PopeClickerGame extends Game {
 
@@ -58,10 +60,16 @@ public class PopeClickerGame extends Game {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         background.getSprite().draw(batch);
-        font.draw(batch, Scores.score.toString(), 10, 75);
-        font.draw(batch, Scores.scorePerSecond.toString(), 10, 50);
-        font.draw(batch, Scores.scorePerClick.toString(), 10, 25);
+
+        int scoreY = SCORE_OFFSET;
+        for (Score s : Scores.scores.values()) {
+            if (!s.isStatistic()) {
+                font.draw(batch, s.toString(), 10, scoreY);
+                scoreY += SCORE_OFFSET;
+            }
+        }
         batch.end();
+
         super.render();
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
