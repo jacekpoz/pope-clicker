@@ -1,5 +1,7 @@
 package com.github.jacekpoz.shop.skins;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
+
 public interface Skin {
 
     boolean isUnlocked();
@@ -11,5 +13,9 @@ public interface Skin {
     String getName();
 
     String getLocation();
+
+    Sprite getSprite();
+
+    Skin[] getSkins();
 
 }

@@ -5,4 +5,6 @@ public interface Buyable {
     void buy();
 
     long getPrice();
+
+    boolean isTouched(float x, float y);
 }

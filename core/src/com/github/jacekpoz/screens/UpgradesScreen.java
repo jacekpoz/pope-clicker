@@ -40,8 +40,7 @@ public class UpgradesScreen implements Screen {
         if (Gdx.input.justTouched()) {
             for (Upgrade u : game.upgrades) {
                 input = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-                if (u.getSprite().getBoundingRectangle().contains(input.x, input.y)
-                        && Scores.canBuyBuyable(u)) {
+                if (u.isTouched(input.x, input.y) && Scores.canBuyBuyable(u)) {
                     u.buy();
                 }
             }

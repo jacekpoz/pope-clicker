@@ -16,17 +16,10 @@ public abstract class Upgrade implements Disposable, Buyable, Json.Serializable 
 
     private Texture image;
     private Sprite sprite;
-    private String name;
-    private String imageName;
-    private long initPrice;
-    protected long price;
-    protected long amount;
+    private String name, imageName;
+    protected long initPrice, price, amount;
     protected int score;
-
-    private float imageX;
-    private float imageY;
-    private float textX;
-    private float textY;
+    private float imageX, imageY, textX, textY;
 
     public Upgrade(String fileName, String upgradeName, long initialPrice, int upgradeScore, int x, int y) {
         imageName = fileName;
@@ -106,10 +99,12 @@ public abstract class Upgrade implements Disposable, Buyable, Json.Serializable 
         textY = imageY - 10;
     }
 
+    @Override
     public void dispose() {
         image.dispose();
     }
 
+    @Override
     public long getPrice() {
         return price;
     }
@@ -128,6 +123,10 @@ public abstract class Upgrade implements Disposable, Buyable, Json.Serializable 
 
     public Sprite getSprite() {
         return sprite;
+    }
+
+    public boolean isTouched(float x, float y) {
+        return sprite.getBoundingRectangle().contains(x, y);
     }
 
     @Override

@@ -72,14 +72,6 @@ public class PopeClickerGame extends Game {
 
         super.render();
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
-            handler.saveAll();
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.H)) {
-            handler.loadAll();
-            Scores.incrementScore();
-        }
-
         if (Gdx.input.isKeyJustPressed(Input.Keys.U)) {
             if (screen instanceof UpgradesScreen) setScreen(new GameScreen(this));
             else setScreen(new UpgradesScreen(this));
@@ -101,9 +93,11 @@ public class PopeClickerGame extends Game {
         if (Gdx.input.isKeyJustPressed(Input.Keys.Y)) SpecialMode.specialMode();
         if (Gdx.input.isKeyJustPressed(Input.Keys.I)) POPE.setSkin(PopeSkin.values()[new Random().nextInt(PopeSkin.values().length)]);
 
+
     }
 
     public void dispose() {
+        handler.saveAll();
         batch.dispose();
         background.dispose();
         font.dispose();

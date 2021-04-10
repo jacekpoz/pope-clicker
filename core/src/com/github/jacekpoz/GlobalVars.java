@@ -26,6 +26,7 @@ public class GlobalVars {
     public static final String BACKGROUNDS_LOCATION = "backgrounds\\";
     public static final String CRATES_LOCATION = "crates\\";
     public static final String SKINS_LOCATION = "skins\\";
+    public static final String THUMBNAILS_LOCATION = "thumbnails\\";
 
     public static final String JSON_LOCATION = "json\\";
 

@@ -63,8 +63,14 @@ public enum Background implements Skin, Disposable {
         return backgroundLocation;
     }
 
+    @Override
     public Sprite getSprite() {
         return backgroundSprite;
+    }
+
+    @Override
+    public Background[] getSkins() {
+        return values();
     }
 
     @Override

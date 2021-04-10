@@ -44,6 +44,8 @@ public enum PopeSkin implements Skin, Disposable {
                 POPE_SIZE, POPE_SIZE);
     }
 
+
+
     @Override
     public boolean isUnlocked() {
         return isUnlocked;
@@ -71,8 +73,14 @@ public enum PopeSkin implements Skin, Disposable {
         return skinLocation;
     }
 
+    @Override
     public Sprite getSprite() {
         return popeSprite;
+    }
+
+    @Override
+    public PopeSkin[] getSkins() {
+        return values();
     }
 
     @Override
