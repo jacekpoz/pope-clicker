@@ -5,7 +5,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.github.jacekpoz.PopeClickerGame;
+import com.github.jacekpoz.shop.crates.BackgroundCrate;
 import com.github.jacekpoz.shop.crates.Crate;
+import com.github.jacekpoz.shop.crates.PopeCrate;
+import com.github.jacekpoz.shop.crates.SoundtrackCrate;
 import com.github.jacekpoz.shop.skins.Background;
 import com.github.jacekpoz.shop.skins.PopeSkin;
 import com.github.jacekpoz.shop.skins.Soundtrack;
@@ -30,9 +33,9 @@ public class ShopScreen implements Screen {
     public ShopScreen(final PopeClickerGame popeClickerGame) {
         game = popeClickerGame;
         crates = new ArrayList<>();
-        Crate<PopeSkin> popeCrate = new Crate<>("Papież skrzynia", 2137, "popecrate.png", 100, 100);
-        Crate<Background> backgroundCrate = new Crate<>("Tło skrzynia", 2137, "backgroundcrate.png", 250, 100);
-        Crate<Soundtrack> soundtrackCrate = new Crate<>("Muzyka skrzynia", 2137, "soundtrackcrate.png", 400, 100);
+        Crate popeCrate = new PopeCrate("Papież skrzynia", 2137, "popecrate.png", 100, 100);
+        Crate backgroundCrate = new BackgroundCrate("Tło skrzynia", 2137, "backgroundcrate.png", 250, 100);
+        Crate soundtrackCrate = new SoundtrackCrate("Muzyka skrzynia", 2137, "soundtrackcrate.png", 400, 100);
         crates.addAll(Arrays.asList(popeCrate, backgroundCrate, soundtrackCrate));
 
         camera = new OrthographicCamera();
@@ -47,6 +50,9 @@ public class ShopScreen implements Screen {
         for (Crate c : crates) {
             c.getSprite().draw(game.batch);
             game.font.draw(game.batch, c.toString(), c.getTextX(), c.getTextY());
+            if (c.isDropping()) {
+                c.getDrop().getSprite().draw(game.batch);
+            }
         }
         game.batch.end();
 

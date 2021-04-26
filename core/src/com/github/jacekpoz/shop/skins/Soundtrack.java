@@ -2,9 +2,12 @@ package com.github.jacekpoz.shop.skins;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Disposable;
+
+import java.util.Random;
 
 import static com.github.jacekpoz.GlobalVars.*;
 
@@ -72,13 +75,13 @@ public enum Soundtrack implements Disposable, Skin {
     }
 
     @Override
-    public Soundtrack[] getSkins() {
-        return values();
+    public void unlock() {
+        isUnlocked = true;
     }
 
     @Override
-    public void unlock() {
-        isUnlocked = true;
+    public String toString() {
+        return songName + ": " + isUnlocked;
     }
 
     @Override

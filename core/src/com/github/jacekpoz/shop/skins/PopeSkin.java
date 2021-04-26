@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Disposable;
 
+import java.util.Random;
+
 import static com.github.jacekpoz.GlobalVars.*;
 
 public enum PopeSkin implements Skin, Disposable {
@@ -79,12 +81,13 @@ public enum PopeSkin implements Skin, Disposable {
     }
 
     @Override
-    public PopeSkin[] getSkins() {
-        return values();
+    public String toString() {
+        return name + ": " + isUnlocked;
     }
 
     @Override
     public void dispose() {
         popeTexture.dispose();
     }
+
 }

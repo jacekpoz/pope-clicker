@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Disposable;
 
+import java.util.Random;
+
 import static com.github.jacekpoz.GlobalVars.*;
 
 public enum Background implements Skin, Disposable {
@@ -39,11 +41,6 @@ public enum Background implements Skin, Disposable {
     }
 
     @Override
-    public String toString() {
-        return this.name;
-    }
-
-    @Override
     public boolean isUnlocked() {
         return isUnlocked;
     }
@@ -69,12 +66,13 @@ public enum Background implements Skin, Disposable {
     }
 
     @Override
-    public Background[] getSkins() {
-        return values();
+    public String toString() {
+        return name + ": " + isUnlocked;
     }
 
     @Override
     public void dispose() {
         backgroundTexture.dispose();
     }
+
 }

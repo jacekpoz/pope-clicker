@@ -13,7 +13,7 @@ import static com.github.jacekpoz.GlobalVars.TEXTURES_LOCATION;
 
 //TODO actually make this class with generics hopefully
 
-public class Crate<S extends Skin> implements Buyable {
+public abstract class Crate implements Buyable {
 
     private static final float CRATE_IMAGE_SIZE = 200;
 
@@ -21,8 +21,9 @@ public class Crate<S extends Skin> implements Buyable {
     private int price;
     private Texture crateTexture;
     private Sprite crateSprite;
-    private S skin;
     private float crateX, crateY, textX, textY;
+    protected Random rand;
+    protected boolean isDropping;
 
     public Crate(String name, int p, String fileName, float x, float y) {
         crateName = name;
@@ -35,17 +36,16 @@ public class Crate<S extends Skin> implements Buyable {
 
         textX = crateX + CRATE_IMAGE_SIZE / 8;
         textY = crateY - 10;
+
+        rand = new Random();
     }
 
     @Override
-    public void buy() {
-        skin = getRandomSkin();
-        skin.unlock();
-    }
+    public abstract void buy();
 
-    private S getRandomSkin() {
-        return (S) skin.getSkins()[new Random().nextInt(skin.getSkins().length)];
-    }
+    protected abstract void showDrop();
+
+    public abstract Skin getDrop();
 
     @Override
     public long getPrice() {
@@ -72,6 +72,10 @@ public class Crate<S extends Skin> implements Buyable {
     @Override
     public String toString() {
         return crateName + "\nCena: " + price;
+    }
+
+    public boolean isDropping() {
+        return isDropping;
     }
 }
 
